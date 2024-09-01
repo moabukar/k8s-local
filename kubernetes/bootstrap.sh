@@ -37,6 +37,13 @@ helm upgrade --install \
   --values ./kubernetes/controllers/traefik/values.yaml \
   --wait
 
+echo "Installing Prometheus..."
+helm install prometheus prometheus-community/prometheus --namespace monitoring --create-namespace
+
+
+echo "Installing Grafana..."
+helm install grafana grafana/grafana --namespace monitoring --create-namespace
+
 ##############################################
 # Install custom configuration
 ##############################################
