@@ -95,8 +95,7 @@ http://prometheus-server.monitoring.svc.cluster.local:80
 
 ```
 
-
-## Improvements on tools to add:
+## Improvements (Platform)
 
 - Alertmanager
 - Loki (logging)
@@ -108,4 +107,3 @@ http://prometheus-server.monitoring.svc.cluster.local:80
 - GitLab/Jenkins?
 - MinIO
 - PostgreSQL/MySQL DBs
-- 
