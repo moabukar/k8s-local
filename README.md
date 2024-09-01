@@ -48,6 +48,7 @@ kubectl get secret cert-traefik -o jsonpath='{.data.tls\.crt}' | base64 --decode
 
 - Trust both certs
 
-- Access "https://whoami.127.0.0.1.nip.io"
-```
+- Access whoami app on "https://whoami.127.0.0.1.nip.io" 
 
+- Access Traefik HTTPS on "https://traefik.127.0.0.1.nip.io/dashboard/"
+```
