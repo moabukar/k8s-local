@@ -34,7 +34,7 @@ spec:
 apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
-  name: traefik-dashboard
+  name: traefik-dashboard-http
 spec:
   entryPoints:
   - web
@@ -44,6 +44,25 @@ spec:
     services:
     - name: api@internal
       kind: TraefikService
+
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: traefik-dashboard-https
+spec:
+  entryPoints:
+  - websecure
+  routes:
+  - match: Host(`traefik.127.0.0.1.nip.io`) && (PathPrefix(`/dashboard`) || PathPrefix(`/api`))
+    kind: Rule
+    services:
+    - name: api@internal
+      kind: TraefikService
+  tls:
+    secretName: cert-traefik
+    domains:
+    - main: traefik.127.0.0.1.nip.io
 ---
 apiVersion: cert-manager.io/v1
 kind: Certificate
@@ -52,7 +71,23 @@ metadata:
 spec:
   dnsNames:
   - whoami.127.0.0.1.nip.io
+  - traefik.127.0.0.1.nip.io
   secretName: cert-whoami
   issuerRef:
     name: self-signed
     kind: ClusterIssuer
+
+---
+## cert for Traefik
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: traefik-cert
+spec:
+  dnsNames:
+  - traefik.127.0.0.1.nip.io
+  secretName: cert-traefik
+  issuerRef:
+    name: self-signed
+    kind: ClusterIssuer
+---

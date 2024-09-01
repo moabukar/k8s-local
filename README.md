@@ -30,3 +30,24 @@ make help
 [💻] WhoAmI application running on: https://whoami.127.0.0.1.nip.io
 [💻] Traefik dashboard accessible at http://traefik.127.0.0.1.nip.io/dashboard/ 
 ```
+
+## Debugging (for cert)
+
+```bash
+k get certificate -A
+
+
+kubectl get secret cert-whoami -o jsonpath='{.data.tls\.crt}' | base64 --decode > whoami.crt
+
+kubectl get secret cert-traefik -o jsonpath='{.data.tls\.crt}' | base64 --decode > traefik.crt
+
+
+- Open keychain access (if using Mac)
+
+- Drag the whoami.crt & traefik.crt to login or local items keychain
+
+- Trust both certs
+
+- Access "https://whoami.127.0.0.1.nip.io"
+```
+
