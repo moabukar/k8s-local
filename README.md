@@ -52,3 +52,16 @@ kubectl get secret cert-traefik -o jsonpath='{.data.tls\.crt}' | base64 --decode
 
 - Access Traefik HTTPS on "https://traefik.127.0.0.1.nip.io/dashboard/"
 ```
+
+## Monitoring
+
+```bash
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+
+helm repo update
+
+helm install prometheus prometheus-community/prometheus --namespace monitoring --create-namespace
+
+Access prometheus on "http://prometheus.127.0.0.1.nip.io"
+
+```

@@ -13,6 +13,11 @@ installCRDs: true
 service:
   type: NodePort
 
+metrics:
+  prometheus:
+    enabled: true
+    entryPoint: metrics
+
 ports:
   web:
     nodePort: 30000
