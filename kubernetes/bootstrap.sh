@@ -62,4 +62,7 @@ echo -e "[💻] Traefik dashboard accessible at http://traefik.127.0.0.1.nip.io/
 
 echo -e "[💻] Prometheus dashboard accessible at http://prometheus.127.0.0.1.nip.io/ \n"
 
-echo -e "[💻] Grafana dashboard accessible at http://grafana.127.0.0.1.nip.io/ \n"
+GRAFANA_PASSWORD=$(kubectl get secret --namespace monitoring grafana -o jsonpath="{.data.admin-password}" | base64 --decode)
+
+echo -e "[💻] Grafana username is: admin"
+echo -e "[💻] Grafana password is: $GRAFANA_PASSWORD"
