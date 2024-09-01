@@ -81,6 +81,9 @@ kubectl get secret --namespace monitoring grafana -o jsonpath="{.data.admin-pass
 # grafana.monitoring.svc.cluster.local
 
 Access grafana on "http://grafana.127.0.0.1.nip.io"
+
+user: admin
+pass: from above secret
 ```
 
 
