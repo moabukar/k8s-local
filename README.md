@@ -94,3 +94,18 @@ pass: from above secret
 http://prometheus-server.monitoring.svc.cluster.local:80
 
 ```
+
+
+## Improvements on tools to add:
+
+- Alertmanager
+- Loki (logging)
+- K8s dashboard?
+- ArgoCD
+- KEDA? 
+- ELK??
+- Service mesh (Istio or Linkerd)
+- GitLab/Jenkins?
+- MinIO
+- PostgreSQL/MySQL DBs
+- 
