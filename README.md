@@ -20,3 +20,13 @@ make down
 
 make help
 ```
+
+## Access
+
+```bash
+
+› Done!
+
+[💻] WhoAmI application running on: https://whoami.127.0.0.1.nip.io
+[💻] Traefik dashboard accessible at http://traefik.127.0.0.1.nip.io/dashboard/ 
+```
