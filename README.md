@@ -56,6 +56,9 @@ kubectl get secret cert-traefik -o jsonpath='{.data.tls\.crt}' | base64 --decode
 ## Monitoring
 
 ```bash
+
+## Prometheus
+
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 
 helm repo update
@@ -63,5 +66,28 @@ helm repo update
 helm install prometheus prometheus-community/prometheus --namespace monitoring --create-namespace
 
 Access prometheus on "http://prometheus.127.0.0.1.nip.io"
+
+## Grafana
+
+helm repo add grafana https://grafana.github.io/helm-charts
+helm repo update
+
+
+helm install grafana grafana/grafana --namespace monitoring --create-namespace
+
+### Get your 'admin' user password 
+kubectl get secret --namespace monitoring grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
+
+# grafana.monitoring.svc.cluster.local
+
+Access grafana on "http://grafana.127.0.0.1.nip.io"
+```
+
+
+## Grafana data source
+
+```bash
+
+http://prometheus-server.monitoring.svc.cluster.local:80
 
 ```
