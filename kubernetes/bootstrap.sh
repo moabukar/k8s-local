@@ -15,6 +15,8 @@ echo -e "\n[·] Downloading helm repositories..."
 
 # helm repo add jetstack https://charts.jetstack.io
 # helm repo add traefik https://traefik.github.io/charts
+# helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+# helm repo add grafana https://grafana.github.io/helm-charts
 # helm repo update
 
 ##############################################
@@ -58,3 +60,6 @@ echo -e "\n› Done!"
 echo -e "\n[💻] WhoAmI application running on: https://whoami.127.0.0.1.nip.io"
 echo -e "[💻] Traefik dashboard accessible at http://traefik.127.0.0.1.nip.io/dashboard/ \n"
 
+echo -e "[💻] Prometheus dashboard accessible at http://prometheus.127.0.0.1.nip.io/ \n"
+
+echo -e "[💻] Grafana dashboard accessible at http://grafana.127.0.0.1.nip.io/ \n"
