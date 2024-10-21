@@ -1,0 +1,12 @@
+server:
+  ingress:
+    enabled: true
+    hosts:
+      - argocd.127.0.0.1.nip.io
+    ingressClassName: traefik  # Set the ingressClassName to Traefik
+    entryPoints: ["web"]
+
+  # Set the base URL for ArgoCD explicitly
+  config:
+    url: http://argocd.127.0.0.1.nip.io
+  insecure: true  # Allow ArgoCD to work without SSL

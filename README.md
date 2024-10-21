@@ -34,7 +34,7 @@ make help
 ## Debugging (for cert)
 
 ```bash
-k get certificate -A
+kubectl get certificate -A
 
 
 kubectl get secret cert-whoami -o jsonpath='{.data.tls\.crt}' | base64 --decode > whoami.crt
@@ -107,3 +107,14 @@ http://prometheus-server.monitoring.svc.cluster.local:80
 - GitLab/Jenkins?
 - MinIO
 - PostgreSQL/MySQL DBs
+
+## Links
+
+[💻] WhoAmI application running on: https://whoami.127.0.0.1.nip.io
+[💻] Traefik dashboard accessible at http://traefik.127.0.0.1.nip.io/dashboard/ 
+
+[💻] Prometheus dashboard accessible at http://prometheus.127.0.0.1.nip.io/ 
+
+[💻] Grafana dashboard accessible at http://grafana.127.0.0.1.nip.io/ 
+
+[💻] ArgoCD dashboard accessible at: http://argocd.127.0.0.1.nip.io/
