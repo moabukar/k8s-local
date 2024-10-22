@@ -2,14 +2,14 @@
 
 Start a local kubernetes cluster with traefik ingress and HTTPS 🚀
 
-## Prerequisites
+## Prerequisites 📋
 
 - [Docker](https://docs.docker.com/install/)
 - [Kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 - [Kind](https://kind.sigs.k8s.io/docs/user/quick-start/#installation)
 - [Helm](https://helm.sh/docs/intro/install/)
 
-## Getting started
+## Getting started 🚀
 
 ```bash
 # start local cluster with ingress, HTTPS and a demo app
@@ -21,7 +21,7 @@ make down
 make help
 ```
 
-## Access
+## Access 🔑
 
 ```bash
 
@@ -31,7 +31,7 @@ make help
 [💻] Traefik dashboard accessible at http://traefik.127.0.0.1.nip.io/dashboard/ 
 ```
 
-## Debugging (for cert)
+## Debugging (for cert) 🔍
 
 ```bash
 kubectl get certificate -A
@@ -53,7 +53,7 @@ kubectl get secret cert-traefik -o jsonpath='{.data.tls\.crt}' | base64 --decode
 - Access Traefik HTTPS on "https://traefik.127.0.0.1.nip.io/dashboard/"
 ```
 
-## Monitoring
+## Monitoring 📊
 
 ```bash
 
@@ -86,8 +86,7 @@ user: admin
 pass: from above secret
 ```
 
-
-## Grafana data source
+## Grafana data source 📈
 
 ```bash
 
@@ -97,11 +96,10 @@ http://prometheus-server.monitoring.svc.cluster.local:80
 
 ## Improvements (Platform)
 
-- Alertmanager
+- ArgoCD ✅
+- Alertmanager ✅
 - Loki (logging)
 - K8s dashboard?
-- ArgoCD
-- KEDA? 
 - ELK??
 - Service mesh (Istio or Linkerd)
 - GitLab/Jenkins?

@@ -79,8 +79,22 @@ helm upgrade --install \
   argocd argo/argo-cd \
   --namespace argocd \
   --create-namespace \
-  --values ./kubernetes/controllers/argocd/values.yaml \
   --wait
+##############################################
+# Apply ArgoCD patch for --insecure
+##############################################
+echo -e "\n[·] Patching ArgoCD for --insecure..."
+
+kubectl patch deployment argocd-server -n argocd \
+  --type='json' \
+  -p='[{
+        "op": "add", 
+        "path": "/spec/template/spec/containers/0/args/-", 
+        "value": "--insecure"
+      }]'
+
+# Restart the argocd-server deployment to apply the patch
+kubectl rollout restart deployment argocd-server -n argocd
 
 ##############################################
 # Install custom configuration
