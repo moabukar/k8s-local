@@ -112,29 +112,40 @@ kubectl apply -k ./kubernetes/apps
 echo -e "\n[·] Extracting and trusting certificates..."
 
 # Extract certificates for whoami and traefik (force overwrite if they exist)
-kubectl get secret cert-whoami -o jsonpath='{.data.tls\.crt}' | base64 --decode > whoami.crt || echo "Error extracting whoami certificate"
-kubectl get secret cert-traefik -o jsonpath='{.data.tls\.crt}' | base64 --decode > traefik.crt || echo "Error extracting traefik certificate"
+# Check if secret exists before extracting the certificate
+if kubectl get secret cert-whoami &> /dev/null; then
+  kubectl get secret cert-whoami -o jsonpath='{.data.tls\.crt}' | base64 --decode > whoami.crt
+else
+  echo "Error: secret 'cert-whoami' not found"
+  exit 1
+fi
 
 # Move certificates to Keychain Access
 echo -e "\n[·] Adding certificates to Keychain Access..."
-security add-trusted-cert -d -r trustRoot -k ~/Library/Keychains/login.keychain-db whoami.crt
 
+# Add and force trust for whoami certificate
+sudo security add-trusted-cert -d -r trustRoot -k ~/Library/Keychains/login.keychain-db whoami.crt
+
+# Manually force trust setting
+
+##############################################
+# Display access details
 ##############################################
 echo -e "\n› Done!"
 echo -e "\n[💻] WhoAmI application running on: https://whoami.127.0.0.1.nip.io"
-echo -e "[💻] Traefik dashboard accessible at http://traefik.127.0.0.1.nip.io/dashboard/ \n"
+echo -e "[💻] Traefik dashboard accessible at https://traefik.127.0.0.1.nip.io/dashboard/ \n"
 
-echo -e "[💻] Prometheus dashboard accessible at http://prometheus.127.0.0.1.nip.io/ \n"
+echo -e "[💻] Prometheus dashboard accessible at https://prometheus.127.0.0.1.nip.io/ \n"
 
 GRAFANA_PASSWORD=$(kubectl get secret -n monitoring grafana -o jsonpath="{.data.admin-password}" | base64 --decode)
 
-echo -e "[💻] Grafana dashboard accessible at http://grafana.127.0.0.1.nip.io/ \n"
+echo -e "[💻] Grafana dashboard accessible at https://grafana.127.0.0.1.nip.io/ \n"
 
 echo -e "[💻] Grafana username is: admin"
 echo -e "[💻] Grafana password is: $GRAFANA_PASSWORD"
 
 # ArgoCD access details
 ARGOCD_PASSWORD=$(kubectl get secret -n argocd argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 --decode)
-echo -e "\n[💻] ArgoCD dashboard accessible at: http://argocd.127.0.0.1.nip.io/"
+echo -e "\n[💻] ArgoCD dashboard accessible at: https://argocd.127.0.0.1.nip.io/"
 echo -e "[💻] ArgoCD username is: admin"
 echo -e "[💻] ArgoCD password is: $ARGOCD_PASSWORD"
