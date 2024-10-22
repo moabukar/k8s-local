@@ -106,6 +106,20 @@ echo -e "\n[·] Installing apps..."
 kubectl apply -k ./kubernetes/apps
 
 ##############################################
+# Extract Certificates and Trust in Keychain (macOS)
+##############################################
+
+echo -e "\n[·] Extracting and trusting certificates..."
+
+# Extract certificates for whoami and traefik (force overwrite if they exist)
+kubectl get secret cert-whoami -o jsonpath='{.data.tls\.crt}' | base64 --decode > whoami.crt || echo "Error extracting whoami certificate"
+kubectl get secret cert-traefik -o jsonpath='{.data.tls\.crt}' | base64 --decode > traefik.crt || echo "Error extracting traefik certificate"
+
+# Move certificates to Keychain Access
+echo -e "\n[·] Adding certificates to Keychain Access..."
+security add-trusted-cert -d -r trustRoot -k ~/Library/Keychains/login.keychain-db whoami.crt
+
+##############################################
 echo -e "\n› Done!"
 echo -e "\n[💻] WhoAmI application running on: https://whoami.127.0.0.1.nip.io"
 echo -e "[💻] Traefik dashboard accessible at http://traefik.127.0.0.1.nip.io/dashboard/ \n"

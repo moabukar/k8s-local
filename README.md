@@ -31,13 +31,13 @@ make help
 [💻] Traefik dashboard accessible at http://traefik.127.0.0.1.nip.io/dashboard/ 
 ```
 
-## Debugging (for cert) 🔍
+## Debugging (for cert) 🔍 (SOON TO BE AUTOMATED)
 
 ```bash
 kubectl get certificate -A
 
 
-kubectl get secret cert-whoami -o jsonpath='{.data.tls\.crt}' | base64 --decode > whoami.crt
+kubectl get secret cert-whoami -o jsonpath='{.data.tls\.crt}' | base64 --decode > whoami.crt ## This cert verifies all the domains atm. 
 
 kubectl get secret cert-traefik -o jsonpath='{.data.tls\.crt}' | base64 --decode > traefik.crt
 
