@@ -126,4 +126,4 @@ http://prometheus-server.monitoring.svc.cluster.local:80
 
 Get token `kubectl -n kubernetes-dashboard create token dashboard-admin` for above dashboard.
 
-[💻] GitLab accessible at: https://gitlab.127.0.0.1.nip.io:8443/ - get password :`kubectl get secret gitlab-gitlab-initial-root-password -n gitlab -o jsonpath="{.data.password}" | base64 --decode; echo`
+[💻] GitLab accessible at: https://gitlab.127.0.0.1.nip.io:8443/ - user: root, get password :`kubectl get secret gitlab-gitlab-initial-root-password -n gitlab -o jsonpath="{.data.password}" | base64 --decode; echo`

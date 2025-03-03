@@ -136,6 +136,8 @@ kubectl rollout restart deployment argocd-server -n argocd
 # Install custom configuration and apps
 ##############################################
 echo -e "\n[·] Installing custom configs and apps..."
+kubectl create ns gitlab
+kubectl create ns kubernetes-dashboard
 kubectl apply -k ./kubernetes/configs
 kubectl apply -k ./kubernetes/apps
 
@@ -291,5 +293,15 @@ echo -e "\n[💻] Kubernetes Dashboard: https://dashboard.127.0.0.1.nip.io (use 
 echo -e "[💻] MinIO: http://minio.127.0.0.1.nip.io/"
 echo -e "[💻] Istio installed (check pods in istio-system namespace)"
 echo -e "[💻] GitLab: Access via Ingress (e.g. http://gitlab.127.0.0.1.nip.io/) - configuration may vary"
+
+# K8s dashboard
+echo -e "\n[💻] K8s dashboard accessible at: https://dashboard.127.0.0.1.nip.io:8443/"
+
+# GitLab root pass
+GITLAB_PASSWORD=$(kubectl get secret gitlab-gitlab-initial-root-password -n gitlab -o jsonpath="{.data.password}" | base64 --decode)
+
+echo -e "\n[💻] GitLab accessible at: https://gitlab.127.0.0.1.nip.io:8443/"
+echo -e "user: root"
+echo -e "password: $GITLAB_PASSWORD"
 
 echo -e "\n› All components have been deployed successfully!"
