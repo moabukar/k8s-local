@@ -136,8 +136,11 @@ kubectl rollout restart deployment argocd-server -n argocd
 # Install custom configuration and apps
 ##############################################
 echo -e "\n[·] Installing custom configs and apps..."
-kubectl create ns gitlab
-kubectl create ns kubernetes-dashboard
+
+# If namespace doesn't exist, create it.
+kubectl create ns gitlab || true
+kubectl create ns kubernetes-dashboard || true
+
 kubectl apply -k ./kubernetes/configs
 kubectl apply -k ./kubernetes/apps
 
