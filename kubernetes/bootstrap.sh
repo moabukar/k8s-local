@@ -296,6 +296,8 @@ echo -e "[💻] GitLab: Access via Ingress (e.g. http://gitlab.127.0.0.1.nip.io/
 
 # K8s dashboard
 echo -e "\n[💻] K8s dashboard accessible at: https://dashboard.127.0.0.1.nip.io:8443/"
+TOKEN=$(kubectl -n kubernetes-dashboard create token dashboard-admin)
+echo -e "[💻] Token: $TOKEN"
 
 # GitLab root pass
 GITLAB_PASSWORD=$(kubectl get secret gitlab-gitlab-initial-root-password -n gitlab -o jsonpath="{.data.password}" | base64 --decode)
