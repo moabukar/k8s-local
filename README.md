@@ -98,13 +98,13 @@ http://prometheus-server.monitoring.svc.cluster.local:80
 
 - ArgoCD ✅
 - Alertmanager ✅
-- Loki (logging)
-- K8s dashboard?
-- ELK??
-- Service mesh (Istio or Linkerd)
-- GitLab/Jenkins?
-- MinIO
-- PostgreSQL/MySQL DBs
+- GitLab ✅
+- K8s dashboard ✅
+- Service mesh (Istio) ✅
+- Drone/Jenkins (TBC)
+- Loki (logging) TBC
+- MinIO TBC
+- PostgreSQL/MySQL DBs (TBC)
 
 ## Links
 
