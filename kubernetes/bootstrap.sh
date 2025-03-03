@@ -301,7 +301,7 @@ echo -e "\n[💻] K8s dashboard accessible at: https://dashboard.127.0.0.1.nip.i
 GITLAB_PASSWORD=$(kubectl get secret gitlab-gitlab-initial-root-password -n gitlab -o jsonpath="{.data.password}" | base64 --decode)
 
 echo -e "\n[💻] GitLab accessible at: https://gitlab.127.0.0.1.nip.io:8443/"
-echo -e "user: root"
-echo -e "password: $GITLAB_PASSWORD"
+echo -e "\n[💻] user: root"
+echo -e "[💻] password: $GITLAB_PASSWORD"
 
 echo -e "\n› All components have been deployed successfully!"
