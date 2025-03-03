@@ -108,7 +108,7 @@ http://prometheus-server.monitoring.svc.cluster.local:80
 
 ## Links
 
-[💻] WhoAmI application running on: https://whoami.127.0.0.1.nip.io
+[💻] WhoAmI application running on: https://whoami.127.0.0.1.nip.io:8080/
 [💻] Traefik dashboard accessible at http://traefik.127.0.0.1.nip.io/dashboard/ 
 
 [💻] Prometheus dashboard accessible at http://prometheus.127.0.0.1.nip.io/ 
@@ -116,3 +116,14 @@ http://prometheus-server.monitoring.svc.cluster.local:80
 [💻] Grafana dashboard accessible at http://grafana.127.0.0.1.nip.io/ 
 
 [💻] ArgoCD dashboard accessible at: http://argocd.127.0.0.1.nip.io/
+
+[💻] ArgoCD HTTPS dashboard accessible at: http://argocd.127.0.0.1.nip.io:8443/
+
+
+## Others
+
+[💻] K8s dashboard accessible at: https://dashboard.127.0.0.1.nip.io:8443/
+
+Get token `kubectl -n kubernetes-dashboard create token dashboard-admin` for above dashboard.
+
+[💻] GitLab accessible at: https://gitlab.127.0.0.1.nip.io:8443/ - get password :`kubectl get secret gitlab-gitlab-initial-root-password -n gitlab -o jsonpath="{.data.password}" | base64 --decode; echo`

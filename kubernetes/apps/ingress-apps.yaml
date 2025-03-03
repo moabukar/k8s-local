@@ -75,6 +75,8 @@ spec:
   - argocd.127.0.0.1.nip.io
   - prometheus.127.0.0.1.nip.io
   - grafana.127.0.0.1.nip.io
+  - dashboard.127.0.0.1.nip.io
+  - gitlab.127.0.0.1.nip.io
   secretName: cert-whoami
   issuerRef:
     name: self-signed
@@ -123,7 +125,6 @@ spec:
     services:
     - name: grafana
       port: 80
-
 ---
 apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
@@ -147,5 +148,50 @@ spec:
         - name: argocd-server
           port: 80
           scheme: h2c
+  tls:
+    certResolver: default
+
+---
+apiVersion: traefik.io/v1alpha1
+kind: ServersTransport
+metadata:
+  name: dashboard-transport
+  namespace: kubernetes-dashboard
+spec:
+  insecureSkipVerify: true
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: kubernetes-dashboard
+  namespace: kubernetes-dashboard
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`dashboard.127.0.0.1.nip.io`)
+      kind: Rule
+      services:
+        - name: kubernetes-dashboard
+          port: 443
+          scheme: https
+          serversTransport: dashboard-transport
+  tls:
+    certResolver: default
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: gitlab-ingress
+  namespace: gitlab
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`gitlab.127.0.0.1.nip.io`)
+      kind: Rule
+      services:
+        - name: gitlab-webservice-default
+          port: 8080
   tls:
     certResolver: default

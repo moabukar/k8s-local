@@ -1,0 +1,13 @@
+global:
+  hosts:
+    domain: 127.0.0.1.nip.io
+    externalIP: ""
+  ingress:
+    configureCertmanager: false
+    tls:
+      enabled: false
+gitlab:
+  unicorn:
+    replicas: 1
+webservice:
+  replicas: 1
